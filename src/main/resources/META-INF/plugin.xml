@@ -1,0 +1,47 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.yuchang.GitCommitMaster</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Git Commit Master</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="yuchang.su@qq.com" url="https://github.com/Yuri-Su">Yuri Su</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+        <h1>Git Commit Master: 一个专门用于规范 Git 提交内容的工具</h1>
+        <ul>
+            <li>有效地引导开发者在提交代码时填写关键信息，包括提交的类型（如 feat - 新功能、fix - 修复 bug 等）、影响的范围、简洁明了的主题、详细的正文描述以及可能需要的脚注。
+                通过强制填写这些信息，确保每次提交都具备足够的描述性和一致性</li>
+            <li>有助于团队成员快速理解每次提交的目的和影响，还能为项目的版本控制和历史追溯提供清晰准确的记录</li>
+        </ul>
+    ]]></description>
+    <change-notes>
+        <![CDATA[
+      <ul>
+        <li><b>1.0</b> 代码提交大师发布 1.0 版本</li>
+      </ul>
+    ]]>
+    </change-notes>
+
+    <actions>
+        <action id="com.yuchang.git.master.PopupDialogAction" class="com.yuchang.git.master.PopupDialogAction"
+                text="提交" description="提交Git信息">
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+        </action>
+    </actions>
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+</idea-plugin>
