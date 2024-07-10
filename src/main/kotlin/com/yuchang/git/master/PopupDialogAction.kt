@@ -1,11 +1,12 @@
 package com.yuchang.git.master
 
+import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.awt.ComposePanel
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.Messages
-import com.intellij.pom.Navigatable
+import com.intellij.openapi.ui.DialogWrapper
+import javax.swing.JComponent
 
 
 /**
@@ -17,23 +18,27 @@ import com.intellij.pom.Navigatable
 class PopupDialogAction : AnAction() {
 
     override fun actionPerformed(event: AnActionEvent) {
-
-        //创建并显示对话框
-        val currentProject: Project? = event.project
-        val message: StringBuilder =
-            StringBuilder(event.presentation.text + " Selected!")
-
-        //如果选中了一个元素，追加该元素的信息
-        val selectedElement: Navigatable? = event.getData(CommonDataKeys.NAVIGATABLE)
-        if (selectedElement != null) {
-            message.append("Selected Element: ").append(selectedElement)
-        }
-        val title: String = event.getPresentation().getDescription()
-        Messages.showMessageDialog(
-            currentProject,
-            message.toString(),
-            title,
-            Messages.getInformationIcon()
-        )
+        SampleDialog(event.project).show()
     }
+
+    class SampleDialog(project: Project?) : DialogWrapper(project) {
+
+        init {
+            title = "Compose Sample"
+            init()
+        }
+
+        override fun createCenterPanel(): JComponent {
+            return ComposePanel().apply {
+                setBounds(0, 0, 800, 600)
+                setContent {
+                    // 这里嵌入我们之前写好的计数器界面
+                    MaterialTheme {
+                        App()
+                    }
+                }
+            }
+        }
+    }
+
 }
